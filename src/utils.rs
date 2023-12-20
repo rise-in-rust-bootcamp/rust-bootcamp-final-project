@@ -1,4 +1,9 @@
+use diesel::prelude::*;
+use diesel::sql_query;
+use diesel::SqliteConnection;
+use dotenvy::dotenv;
 use inquire::{required, CustomType, Text};
+use std::env;
 
 pub fn prompt_text(message: &str, required: bool, initial: Option<&str>) -> String {
     let mut prompt_input: Text<'_> = Text::new(message);
@@ -32,4 +37,15 @@ pub fn prompt_amount(message: &str, initial: Option<f64>) -> f64 {
     }
 
     prompt_input.prompt().unwrap()
+}
+
+pub fn get_db_connection() -> SqliteConnection {
+    dotenv().ok();
+    let database_url = env::var("DATABASE_URL").expect("DATABASE_URL must be set");
+    let mut conn: SqliteConnection = SqliteConnection::establish(&database_url).unwrap();
+    sql_query("PRAGMA foreign_keys = ON")
+        .execute(&mut conn)
+        .expect("PRAGMA foreign_keys command failed");
+
+    conn
 }

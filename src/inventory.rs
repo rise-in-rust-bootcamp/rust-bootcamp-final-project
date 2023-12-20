@@ -92,7 +92,7 @@ pub fn list_products(connection: &mut SqliteConnection) {
     let results = products::table
         .select(Product::as_select())
         .load(connection)
-        .expect("Error loading posts");
+        .expect("Error loading products");
 
     let mut table = Table::new(results);
     table.with(Panel::header("Products"));

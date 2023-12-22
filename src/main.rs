@@ -8,6 +8,7 @@ pub mod utils;
 
 pub mod inventory;
 pub mod purchase_orders;
+pub mod sale_transactions;
 
 #[derive(Parser, Debug)]
 #[clap(author, version, about, long_about = None)]
@@ -36,7 +37,7 @@ enum Command {
         #[clap(subcommand)]
         action: CommandCRADAction,
     },
-    Sales {
+    SaleTransactions {
         #[clap(subcommand)]
         action: CommandAddListAction,
     },
@@ -61,8 +62,9 @@ fn main() {
             CommandAddListAction::Add => purchase_orders::prompt_add_purchase_order(&mut conn),
             CommandAddListAction::List => purchase_orders::list_purchase_orders(&mut conn),
         },
-        _ => {
-            println!("other")
-        }
+        Command::SaleTransactions { action } => match action {
+            CommandAddListAction::Add => sale_transactions::prompt_add_sale_transaction(&mut conn),
+            CommandAddListAction::List => sale_transactions::list_sale_transactions(&mut conn),
+        },
     }
 }

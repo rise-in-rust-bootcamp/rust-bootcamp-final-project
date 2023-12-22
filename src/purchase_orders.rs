@@ -40,6 +40,11 @@ pub fn prompt_add_purchase_order(connection: &mut SqliteConnection) {
         .set(&product)
         .execute(connection)
         .expect("Error updating product");
+
+    println!(
+        "Successfully added purchase order. Total cost: ${:.2}",
+        price * quantity as f64
+    );
 }
 
 pub fn list_purchase_orders(connection: &mut SqliteConnection) {

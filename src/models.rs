@@ -46,6 +46,31 @@ pub struct NewPurchaseOrder {
     pub quantity: i32,
 }
 
+#[derive(Queryable, Selectable, AsChangeset, Identifiable, Tabled, Debug)]
+#[diesel(table_name = crate::schema::sale_transactions)]
+#[diesel(check_for_backend(diesel::sqlite::Sqlite))]
+#[diesel(belongs_to(Product))]
+pub struct SaleTransaction {
+    pub id: i32,
+    pub product_id: i32,
+    #[tabled(display_with = "display_price")]
+    pub product_price: f64,
+    #[tabled(display_with = "display_price")]
+    pub sold_price: f64,
+    pub quantity: i32,
+}
+
+#[derive(Insertable)]
+#[diesel(table_name = crate::schema::sale_transactions)]
+#[diesel(check_for_backend(diesel::sqlite::Sqlite))]
+#[diesel(belongs_to(Product))]
+pub struct NewSaleTransaction {
+    pub product_id: i32,
+    pub product_price: f64,
+    pub sold_price: f64,
+    pub quantity: i32,
+}
+
 fn display_option(o: &Option<String>) -> String {
     match o {
         Some(s) => s.to_string(),

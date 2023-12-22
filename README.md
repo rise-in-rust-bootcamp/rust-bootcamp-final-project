@@ -17,3 +17,71 @@ The system should have the following features:
 **Security**: The system should have basic security measures in place, such as authentication for store managers to prevent unauthorized access to the inventory, sales, and purchase data.
 
 **User Interface**: The system should have a clear and intuitive text-based user interface that allows store managers to easily navigate and perform tasks.
+
+## How to run
+
+Copy and edit the database endpoint
+
+```sh
+$ cp .example .example
+```
+
+Run the migration
+
+```
+$ disesel setup
+```
+
+### Product Management
+
+Add a new product
+
+```sh
+$ cargo run inventory add
+```
+
+List all products
+
+```sh
+$ cargo run inventory list
+```
+
+Edit a product
+
+```sh
+$ cargo run inventory edit
+```
+
+Delete a product
+
+```sh
+$ cargo run inventory delete
+```
+
+### Purchase Orders
+
+Add a new purchase order
+
+```sh
+$ cargo run purchase-orders add
+```
+
+List all purchase orders
+
+```sh
+$ cargo run purchase-orders list
+```
+
+### Sale Transactions
+
+Add a new sale transaction
+
+```sh
+$ cargo run sale-transactions add
+```
+
+List all sale transactions
+
+```sh
+$ cargo run sale-transactions list
+```

@@ -18,6 +18,8 @@ The system should have the following features:
 
 **User Interface**: The system should have a clear and intuitive text-based user interface that allows store managers to easily navigate and perform tasks.
 
+![Program Preview](./program_preview.gif)
+
 ## How to run
 
 Copy and edit the database endpoint
@@ -85,3 +87,7 @@ List all sale transactions
 ```sh
 $ cargo run sale-transactions list
 ```
+
+## To-Do
+
+- [ ] User Authentication
